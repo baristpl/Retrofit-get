@@ -12,7 +12,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0"/>
+        app:layout_constraintHorizontal_bias="0"
+        android:contentDescription="@string/thumbnail" />
 
     <TextView
         android:id="@+id/title"
@@ -24,7 +25,7 @@
         app:layout_constraintStart_toStartOf="@id/thumbnail"
         app:layout_constraintTop_toBottomOf="@+id/thumbnail"
         android:fontFamily="@font/poppins"
-        android:textSize="13dp"/>
+        android:textSize="13sp"/>
 
     <TextView
         android:id="@+id/sub_title"
@@ -36,6 +37,6 @@
         app:layout_constraintStart_toStartOf="@+id/title"
         app:layout_constraintTop_toBottomOf="@+id/title"
         android:fontFamily="@font/poppins"
-        android:textSize="10dp" />
+        android:textSize="11sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,4 +2,9 @@
     <string name="app_name">Retrofit Get Data</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="universities">Universities</string>
+    <string name="departments">Departments</string>
+    <string name="countries">Countries</string>
+    <string name="blogs">Blogs</string>
+    <string name="thumbnail">thumbnail</string>
 </resources>
