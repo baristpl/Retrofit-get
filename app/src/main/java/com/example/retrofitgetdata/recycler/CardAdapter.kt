@@ -10,8 +10,9 @@ import com.example.retrofitgetdata.models.CardModel
 import com.squareup.picasso.Picasso
 
 
-class CardAdapter(private val data: ArrayList<CardModel>, private val context: Context) :
+class CardAdapter( private val context: Context) :
     RecyclerView.Adapter<CardHolder>() {
+    private val data: ArrayList<CardModel> = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardHolder {
 
 
@@ -23,13 +24,15 @@ class CardAdapter(private val data: ArrayList<CardModel>, private val context: C
     override fun onBindViewHolder(holder: CardHolder, position: Int) {
         holder.title.text = data[position].title
 
-        if (data[position].subTitle != "")
-            holder.subTitle.text = data[position].subTitle
+        holder.subTitle.text = data[position].subTitle
 
         Picasso.with(context).load(data[position].thumbnail).into(holder.thumbnail)
 
     }
-
+    fun setData(newData: ArrayList<CardModel>) {
+        this.data.clear()
+        this.data.addAll(newData)
+    }
     override fun getItemCount(): Int {
         return data.size
     }
