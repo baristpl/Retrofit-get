@@ -5,12 +5,12 @@
       <map>
         <entry key="app/src/main/res/font/b612_mono.xml" value="0.3962962962962963" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.41041666666666665" />
-        <entry key="app/src/main/res/layout/card_list_item.xml" value="0.353125" />
+        <entry key="app/src/main/res/layout/card_list_item.xml" value="0.4403717041015624" />
         <entry key="app/src/main/res/layout/department_item.xml" value="0.375" />
         <entry key="app/src/main/res/layout/department_list_item.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.22864583333333333" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.409375" />
-        <entry key="app/src/main/res/layout/grid_item.xml" value="0.353125" />
+        <entry key="app/src/main/res/layout/grid_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.6206896551724138" />
         <entry key="app/src/main/res/layout/university_list_item.xml" value="0.3696756998697917" />
       </map>

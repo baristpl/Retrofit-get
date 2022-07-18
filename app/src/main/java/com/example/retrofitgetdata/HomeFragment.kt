@@ -22,9 +22,9 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.universityRecycler.adapter = CardAdapter(requireContext())
-        binding.countryRecycler.adapter = CardAdapter(requireContext())
-        binding.blogRecycler.adapter = CardAdapter(requireContext())
+        binding.universityRecycler.adapter = CardAdapter()
+        binding.countryRecycler.adapter = CardAdapter()
+        binding.blogRecycler.adapter = CardAdapter()
         binding.departmentRecycler.adapter = GridAdapter()
 
         return binding.root

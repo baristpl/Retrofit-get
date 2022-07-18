@@ -50,6 +50,7 @@
                 android:text="@string/departments"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
+
             <!-- DEPARTMENT RECYCLER           -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/department_recycler"
@@ -70,6 +71,7 @@
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 
+            <!-- COUNTRY RECYCLER           -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/country_recycler"
                 linearListData="@{viewModel.countryContent}"
@@ -88,6 +90,7 @@
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 
+            <!-- BLOG RECYCLER           -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/blog_recycler"
                 linearListData="@{viewModel.blogContent}"
