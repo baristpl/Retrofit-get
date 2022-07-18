@@ -1,72 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".HomeFragment"
-    android:fillViewport="true">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.retrofitgetdata.HomeViewModel" />
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#171313"
-        android:orientation="vertical"
-        android:paddingTop="30dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".HomeFragment">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_bold"
-            android:padding="10dp"
-            android:text="@string/universities"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/university_recycler"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_bold"
-            android:padding="10dp"
-            android:text="@string/departments"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:background="#171313"
+            android:orientation="vertical"
+            android:paddingTop="30dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/department_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:padding="10dp"
+                android:text="@string/universities"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_bold"
-            android:padding="10dp"
-            android:text="@string/countries"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
+            <!-- UNIVERSITY RECYCLER           -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/university_recycler"
+                linearListData="@{viewModel.universityContent}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:reverseLayout="false" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/country_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:padding="10dp"
+                android:text="@string/departments"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+            <!-- DEPARTMENT RECYCLER           -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/department_recycler"
+                gridListData="@{viewModel.departmentContent}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:reverseLayout="false"
+                app:spanCount="2" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_bold"
-            android:padding="10dp"
-            android:text="@string/blogs"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:padding="10dp"
+                android:text="@string/countries"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/blog_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-</ScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/country_recycler"
+                linearListData="@{viewModel.countryContent}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:reverseLayout="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:padding="10dp"
+                android:text="@string/blogs"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/blog_recycler"
+                linearListData="@{viewModel.blogContent}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:reverseLayout="false" />
+        </LinearLayout>
+    </ScrollView>
+</layout>

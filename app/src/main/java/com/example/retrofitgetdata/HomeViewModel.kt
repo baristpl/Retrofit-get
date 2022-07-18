@@ -22,21 +22,18 @@ class HomeViewModel : ViewModel() {
     private lateinit var countryResult: List<CountryResult>
     private lateinit var blogResult: List<BlogResult>
 
-    private var _universityContent = MutableLiveData<ArrayList<CardModel>>()
-    val universityContent: LiveData<ArrayList<CardModel>>
-        get() = _universityContent
+    private val _universityContent = MutableLiveData<ArrayList<CardModel>>()
+    val universityContent: LiveData<ArrayList<CardModel>> = _universityContent
 
-    private var _countryContent = MutableLiveData<ArrayList<CardModel>>()
-    val countryContent: LiveData<ArrayList<CardModel>>
-        get() = _countryContent
+    private val _countryContent = MutableLiveData<ArrayList<CardModel>>()
+    val countryContent: LiveData<ArrayList<CardModel>> = _countryContent
 
-    private var _blogContent = MutableLiveData<ArrayList<CardModel>>()
-    val blogContent: LiveData<ArrayList<CardModel>>
-        get() = _blogContent
+    private val _blogContent =
+        MutableLiveData<ArrayList<CardModel>>()
+    val blogContent: LiveData<ArrayList<CardModel>> = _blogContent
 
-    private var _departmentContent = MutableLiveData<ArrayList<String>>()
-    val departmentContent: LiveData<ArrayList<String>>
-        get() = _departmentContent
+    private val _departmentContent = MutableLiveData<ArrayList<String>>()
+    val departmentContent: LiveData<ArrayList<String>> = _departmentContent
 
     private var fetchControl: Int by Delegates.observable(0) { _, _, newValue ->
         if (newValue == REQUEST_NUM) initializeContent()
@@ -49,20 +46,22 @@ class HomeViewModel : ViewModel() {
         for (result in universityResult) {
             tempContent.add(CardModel(result.name_, result.province_.name_, result.thumbnail_))
         }
-        _universityContent.value = tempContent
+        _universityContent.value = ArrayList(tempContent)
         tempContent.clear()
 
         for (result in countryResult) {
             tempContent.add(CardModel(result.name_, "", result.image_))
         }
-        _countryContent.value = tempContent
+        _countryContent.value = ArrayList(tempContent)
         tempContent.clear()
 
         for (result in blogResult) {
             tempContent.add(CardModel(result.name_, "", result.thumbnail_))
         }
-        _blogContent.value = tempContent
+
+        _blogContent.value = ArrayList(tempContent)
         tempContent.clear()
+
 
         for (result in departmentResult)
             tempDepartmentList.add(result.name_)

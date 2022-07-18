@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -8,8 +9,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.retrofitgetdata"
-        minSdk 29
-        targetSdk 32
+        minSdk 21
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -18,9 +19,12 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    buildFeatures {
+        dataBinding = true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -28,9 +32,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-    }
-    buildFeatures {
-        viewBinding = true
     }
 }
 
@@ -50,5 +51,6 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:2.4.2"
     implementation "androidx.navigation:navigation-ui-ktx:2.4.2"
     implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.31"
 
 }
