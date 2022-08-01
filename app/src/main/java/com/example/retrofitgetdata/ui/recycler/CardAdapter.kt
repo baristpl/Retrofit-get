@@ -1,19 +1,12 @@
-package com.example.retrofitgetdata.recycler
+package com.example.retrofitgetdata.ui.recycler
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.retrofitgetdata.R
 import com.example.retrofitgetdata.databinding.CardListItemBinding
 import com.example.retrofitgetdata.models.CardModel
-import com.squareup.picasso.Picasso
 
 class CardAdapter() :
    ListAdapter<CardModel, CardHolder>(DiffCallback) {

@@ -1,79 +1,121 @@
-package com.example.retrofitgetdata
+package com.example.retrofitgetdata.repository
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.Transformations
+import com.example.retrofitgetdata.*
 import com.example.retrofitgetdata.clientApi.ClientApi
 import com.example.retrofitgetdata.clientApi.Service
+import com.example.retrofitgetdata.database.CardDatabaseDao
+import com.example.retrofitgetdata.database.CardEntity
+import com.example.retrofitgetdata.database.DepartmentEntity
 import com.example.retrofitgetdata.models.CardModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.collections.ArrayList
 import kotlin.properties.Delegates
 
 const val REQUEST_NUM = 4
 
-class HomeViewModel : ViewModel() {
-
+class Repository(private val databaseDao: CardDatabaseDao) {
     private lateinit var universityResult: List<UniversityResult>
     private lateinit var departmentResult: List<DepartmentResult>
     private lateinit var countryResult: List<CountryResult>
     private lateinit var blogResult: List<BlogResult>
 
-    private val _universityContent = MutableLiveData<ArrayList<CardModel>>()
-    val universityContent: LiveData<ArrayList<CardModel>> = _universityContent
+    val universityContent: LiveData<List<CardModel>> =
+        Transformations.map(databaseDao.getUniversityCards()) {
+            it.map {
+                CardModel(
+                    title = it.title,
+                    subTitle = it.subTitle,
+                    thumbnail = it.thumbnail
+                )
+            }
+        }
 
-    private val _countryContent = MutableLiveData<ArrayList<CardModel>>()
-    val countryContent: LiveData<ArrayList<CardModel>> = _countryContent
+    val blogContent: LiveData<List<CardModel>> = Transformations.map(databaseDao.getBlogCards()) {
+        it.map {
+            CardModel(
+                title = it.title,
+                subTitle = it.subTitle,
+                thumbnail = it.thumbnail
+            )
 
-    private val _blogContent =
-        MutableLiveData<ArrayList<CardModel>>()
-    val blogContent: LiveData<ArrayList<CardModel>> = _blogContent
+        }
+    }
 
-    private val _departmentContent = MutableLiveData<ArrayList<String>>()
-    val departmentContent: LiveData<ArrayList<String>> = _departmentContent
+    val countryContent: LiveData<List<CardModel>> =
+        Transformations.map(databaseDao.getCountryCards()) {
+            it.map {
+                CardModel(
+                    title = it.title,
+                    subTitle = it.subTitle,
+                    thumbnail = it.thumbnail
+                )
+            }
+        }
+
+   val departmentContent: LiveData<List<String>> =
+       Transformations.map(databaseDao.getDepartments()) {
+           it.map {
+               it.name
+           }
+       }
 
     private var fetchControl: Int by Delegates.observable(0) { _, _, newValue ->
-        if (newValue == REQUEST_NUM) initializeContent()
+        if (newValue == REQUEST_NUM)
+            GlobalScope.launch {
+                refreshDatabase()
+            }
     }
 
-    private fun initializeContent() {
-        val tempContent = arrayListOf<CardModel>()
-        val tempDepartmentList = arrayListOf<String>()
-
+    private fun refreshDatabase() {
         for (result in universityResult) {
-            tempContent.add(CardModel(result.name_, result.province_.name_, result.thumbnail_))
+            databaseDao.insertCard(
+                CardEntity(
+                    title = result.name_,
+                    subTitle = result.province_.name_,
+                    thumbnail = result.thumbnail_,
+                    type = "university"
+                )
+            )
+
         }
-        _universityContent.value = ArrayList(tempContent)
-        tempContent.clear()
 
         for (result in countryResult) {
-            tempContent.add(CardModel(result.name_, "", result.image_))
+            databaseDao.insertCard(
+                CardEntity(
+                    title = result.name_,
+                    subTitle = "",
+                    thumbnail = result.image_,
+                    type = "country"
+                )
+            )
         }
-        _countryContent.value = ArrayList(tempContent)
-        tempContent.clear()
 
         for (result in blogResult) {
-            tempContent.add(CardModel(result.name_, "", result.thumbnail_))
+            databaseDao.insertCard(
+                CardEntity(
+                    title = result.name_,
+                    subTitle = "",
+                    thumbnail = result.thumbnail_,
+                    type = "blog"
+                )
+            )
         }
 
-        _blogContent.value = ArrayList(tempContent)
-        tempContent.clear()
-
-
-        for (result in departmentResult)
-            tempDepartmentList.add(result.name_)
-
-        _departmentContent.value = tempDepartmentList
+        for (result in departmentResult) {
+            databaseDao.insertDepartment(DepartmentEntity(
+                name = result.name_
+            ))
+        }
     }
 
-    init {
-        getContentFromRestApi()
-    }
-
-    private fun getContentFromRestApi() {
+    fun refreshContent() {
         val service = ClientApi.getClient().create(Service::class.java)
 
         service.getUniList().enqueue(object : Callback<UniversityModel> {
@@ -103,6 +145,7 @@ class HomeViewModel : ViewModel() {
             ) {
                 if (response.isSuccessful)
                     departmentResult = response.body()?.results_!!
+
                 ++fetchControl
             }
         })

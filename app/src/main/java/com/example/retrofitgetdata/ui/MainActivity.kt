@@ -1,8 +1,9 @@
-package com.example.retrofitgetdata
+package com.example.retrofitgetdata.ui
 
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import com.example.retrofitgetdata.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,6 +13,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.setStatusBarColor(resources.getColor(R.color.univerlist))
+        window.statusBarColor = resources.getColor(R.color.univerlist)
     }
 }

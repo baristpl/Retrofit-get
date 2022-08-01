@@ -4,14 +4,14 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofitgetdata.models.CardModel
-import com.example.retrofitgetdata.recycler.CardAdapter
-import com.example.retrofitgetdata.recycler.GridAdapter
+import com.example.retrofitgetdata.ui.recycler.CardAdapter
+import com.example.retrofitgetdata.ui.recycler.GridAdapter
 import com.squareup.picasso.Picasso
 
 @BindingAdapter("linearListData")
 fun bindLinearRecyclerView(
     recyclerView: RecyclerView,
-    data: ArrayList<CardModel>?
+    data: List<CardModel>?
 ) {
     val adapter = recyclerView.adapter as CardAdapter
     if (data != null) {
@@ -22,7 +22,7 @@ fun bindLinearRecyclerView(
 @BindingAdapter("gridListData")
 fun bindGridRecyclerView(
     recyclerView: RecyclerView,
-    data: ArrayList<String>?
+    data: List<String>?
 ) {
     val adapter = recyclerView.adapter as GridAdapter
     if (data != null) {

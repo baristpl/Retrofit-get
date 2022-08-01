@@ -8,7 +8,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface Service {
-    @GET("/api/v2/university/")
+    @GET("/api/v2/university/?page=3")
     fun getUniList(): Call<UniversityModel>
 
     @GET("/api/v2/department/")

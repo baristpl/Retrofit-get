@@ -4,5 +4,4 @@ data class CardModel(
     val title: String,
     val subTitle: String,
     val thumbnail: String
-
 )

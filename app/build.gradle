@@ -52,5 +52,11 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.4.2"
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.31"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+    // Room dependency
+    def room_version = "2.4.3"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
 }
